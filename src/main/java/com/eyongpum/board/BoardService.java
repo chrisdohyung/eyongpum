@@ -1,5 +1,10 @@
 package com.eyongpum.board;
 
+import java.util.List;
+
+import com.eyongpum.util.PageMaker;
+import com.eyongpum.util.PageCalculator;
+
 public class BoardService {
 	private static BoardService _instance;
 	private BoardDao boardDao;
@@ -45,6 +50,13 @@ public class BoardService {
 	public BoardListPageMakerDto findBoardList(int currentPage) throws Exception {
 		int totalRecordCount = boardDao.getBoardCount();
 		PageMaker pageMaker = new PageMaker(totalRecordCount,currentPage);
+		List<Board> boardList = boardDao.findBoardList(pageMaker.getPageBegin(), pageMaker.getPageEnd());
+		
+		BoardListPageMakerDto pageMakerBoardList = new BoardListPageMakerDto();
+		pageMakerBoardList.totRecordCount = totalRecordCount;
+		pageMakerBoardList.itemList = boardList;
+		pageMakerBoardList.pageMaker = pageMaker;
+		return pageMakerBoardList;
 	}
 
 }
