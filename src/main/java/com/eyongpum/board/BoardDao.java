@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.sql.DataSource;
-import org.apache.commons.dbcp2.BasicDataSource;
+
+import com.eyongpum.util.BasicDataSource;
 
 public class BoardDao {
 	private DataSource dataSource;
